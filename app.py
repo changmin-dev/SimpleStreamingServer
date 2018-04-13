@@ -45,8 +45,6 @@ def send_partial_file(path):
     response.headers.add('Content-Range', 'bytes {0}-{1}/{2}'.format(start, start + length - 1, size))
     response.headers.add('Accept-Ranges', 'bytes')
     
-    # 일부 요청에서(VLC 등) 'Connection : close'로 요청을 해서 적용해 봄 하지만 확실한 규명이 안됨 
-    #response.headers.add('Connection', 'keep-alive')
     print(response.headers)
 
     return response
@@ -69,10 +67,6 @@ def stream(filename):
     print(request.headers)
     return send_partial_file(filename)
 
-@app.route("/")
-def index():
-    return render_template("stream.html")
-
 try:
     port_number = sys.argv[1]
 except IndexError:
@@ -82,5 +76,5 @@ try:
     PORT = int(os.environ.get('SERVER_PORT', port_number))
 except ValueError:
     PORT = 5000
-app.run(HOST, PORT)
+app.run(HOST, PORT, threaded=True)
 
