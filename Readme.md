@@ -1,8 +1,10 @@
 간단한 HTTP 스트리밍 서버
 ---
-
-### HTTP Range Request / Partial Contents Response를 이용했습니다.
-[MDN](https://developer.mozilla.org/ko/docs/Web/HTTP/Range_requests)
+HTTP Range 요청에 대해서 Partial Contents Response 합니다.
+![diagram](doc/message_diagram.png)
 
 ### 환경
 python3, Flask
+
+### 실행
+python3 ./app.py
